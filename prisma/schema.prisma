@@ -1,0 +1,299 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+// Necessary for Next auth
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model SavedAddress {
+  id              String  @id @default(cuid())
+  user            User    @relation(fields: [userId], references: [id])
+  userId          String
+  latitude        Float?
+  longitude       Float?
+  receiverName    String?
+  addressNickname String?
+  receiverPhone   String
+  city            String?
+  state           String?
+  country         String?
+  zipCode         String?
+  isPrimary       Boolean @default(false)
+  Order           Order[]
+
+  @@index([userId])
+}
+
+model User {
+  id                       String                      @id @default(cuid())
+  name                     String?
+  email                    String?                     @unique
+  emailVerified            DateTime?
+  image                    String?
+  role                     USER_ROLE                   @default(USER)
+  active                   Boolean                     @default(true)
+  phone                    String                     @default("")
+  accounts                 Account[]
+  sessions                 Session[]
+  createdAt                DateTime                    @default(now())
+  updatedAt                DateTime                    @updatedAt
+  orders                   Order[]
+  savedAddresses           SavedAddress[]
+  password                 String?
+  RazorpayCreatedOrder     RazorpayOrder[]
+  stripeCustomerId         String?
+  stripeSubscriptionId     String?
+  stripeSubscriptionStatus STRIPE_SUBSCRIPTION_STATUS? @default(incomplete)
+  stripeCustomer           StripeCustomer?             @relation(fields: [stripeCustomerId], references: [id], onDelete: Cascade)
+  stripeSubscription       StripeSubscription?         @relation(fields: [stripeSubscriptionId], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@index([stripeCustomerId])
+  @@index([stripeSubscriptionId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Product {
+  id          String           @id @default(cuid())
+  name        String
+  price       Float
+  category    PRODUCT_CATEGORY
+  description String           @db.Text
+  image       String
+  rating      Float            @default(0)
+  quantity    Int              @default(1)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  items       OrderItem[]
+}
+
+model Order {
+  id                String        @id @default(cuid())
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  items             OrderItem[]
+  archived          Boolean       @default(false)
+  status            ORDER_STATUS  @default(PENDING)
+  shippingAddressId String?
+  shippingAddress   SavedAddress? @relation(fields: [shippingAddressId], references: [id])
+
+  @@index([userId])
+}
+
+model OrderItem {
+  id        String       @id @default(cuid())
+  order     Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String
+  product   Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  quantity  Int
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  archived  Boolean      @default(false)
+  status    ORDER_STATUS @default(PENDING)
+
+  @@index([orderId])
+  @@index([productId])
+}
+// schema.prisma
+
+model RazorpayOrder {
+  id                String   @id @default(cuid())
+  razorpayId        String   @unique
+  amount            Int
+  currency          String
+  status            PaymentOrderCreatedStatus   // e.g., 'created', 'paid', 'failed'
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderId           String?  // Optional, if you want to link it with an Order model
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  PaymentDetails    RazorpayPayment?
+}
+
+model RazorpayPayment {
+  id          String   @id @default(cuid())
+  razorpayId  String   @unique
+  amount      Int
+  currency    String
+  status      PaymentStatus
+  orderId     String   @unique
+  order       RazorpayOrder @relation(fields: [orderId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum PaymentStatus{
+    SUCCESS
+    PENDING
+    FAILED
+  }
+
+enum PaymentOrderCreatedStatus{
+    CREATED
+    FAILED
+    PAID
+  }
+
+
+model StripeEvent {
+  id               String   @id @default(cuid())
+  api_version      String?
+  data             Json
+  request          Json?
+  type             String
+  object           String
+  acount           String?
+  livemode         Boolean
+  pending_webhooks Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model StripeCustomer {
+  id                    String   @id @default(cuid())
+  object                String
+  address               Json?
+  balance               Int
+  created               DateTime
+  currency              String
+  default_source        String?
+  delinquent            Boolean
+  description           String?
+  discount              Json?
+  email                 String?
+  invoice_prefix        String
+  invoice_settings      Json?
+  livemode              Boolean
+  metadata              Json?
+  name                  String?
+  next_invoice_sequence Int
+  phone                 String?
+  preferred_locales     Json?
+  shipping              Json?
+  tax_exempt            String
+  test_clock            Json?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  users                 User[]
+}
+
+model StripeSubscription {
+  id                                String    @id @default(cuid())
+  object                            String
+  application                       String?
+  application_fee_percent           Int?
+  automatic_tax                     Json?
+  billing_cycle_anchor              Int
+  billing_thresholds                Json?
+  cancel_at                         DateTime?
+  cancel_at_period_end              Boolean
+  canceled_at                       DateTime?
+  collection_method                 String
+  created                           DateTime
+  currency                          String
+  current_period_end                Int
+  current_period_start              Int
+  customer                          String
+  days_until_due                    Int?
+  default_payment_method            String?
+  default_source                    String?
+  default_tax_rates                 Json?
+  description                       String?
+  discount                          Json?
+  ended_at                          DateTime?
+  items                             Json
+  latest_invoice                    String?
+  livemode                          Boolean
+  metadata                          Json
+  next_pending_invoice_item_invoice String?
+  on_behalf_of                      String?
+  pause_collection                  Json?
+  payment_settings                  Json
+  pending_invoice_item_interval     Json?
+  pending_setup_intent              String?
+  pending_update                    Json?
+  schedule                          String?
+  start_date                        Int
+  status                            String
+  test_clock                        Json?
+  transfer_data                     Json?
+  trial_end                         DateTime?
+  trial_start                       DateTime?
+  createdAt                         DateTime  @default(now())
+  updatedAt                         DateTime  @updatedAt
+  users                             User[]
+}
+
+enum USER_ROLE {
+  ADMIN
+  USER
+}
+
+enum PRODUCT_CATEGORY {
+  ACCESSORIES
+  PIPES
+  SWITCHES
+  WIRES
+  LIGHTING
+}
+
+enum ORDER_STATUS {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELED
+}
+
+enum STRIPE_SUBSCRIPTION_STATUS {
+  incomplete
+  incomplete_expired
+  trialing
+  active
+  past_due
+  canceled
+  unpaid
+}
