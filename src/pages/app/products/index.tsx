@@ -1,5 +1,5 @@
-import type { NextPageWithLayout } from "@/src/pages/_app";
 import { trpc } from "@/src/utils/trpc";
+import type { NextPageWithLayout } from "@/src/pages/_app";
 import Head from "next/head";
 
 // external components
@@ -26,7 +26,7 @@ const Products: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Products | Siddharth-Electricals</title>
+        <title>Products | 1Stop4It</title>
       </Head>
       <main className="min-h-screen bg-bg-gray ">
         <ProductList products={productsQuery.data} />

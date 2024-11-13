@@ -142,7 +142,7 @@ const UpdateProduct: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Update Product | Siddharth-Electricals</title>
+        <title>Update Product | 1Stop4It</title>
       </Head>
       <main className="min-h-screen pb-14 pt-52 md:pt-40">
         <div className="mx-auto grid w-full max-w-screen-sm gap-4 px-4 sm:w-[95vw]">

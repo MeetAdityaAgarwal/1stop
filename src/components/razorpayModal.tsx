@@ -60,7 +60,7 @@ const RazorpayCheckout: React.FC<RazorpayCheckoutProps> = ({ currency, userId, o
       key: 'rzp_test_Ld8VJIKgd9spxQ',
       amount: amount * 100, // amount in paise
       currency,
-      name: 'Siddharth-Electricals',
+      name: '1Stop4It',
       description: 'Order Description',
       order_id: data.orderId,
       handler: async function(response: any) {

@@ -16,7 +16,7 @@ export default function Component() {
             <div className="mx-auto max-w-3xl text-center">
               <h1 className="text-3xl  tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">Privacy Policy</h1>
               <p className="mt-4 text-muted-foreground md:text-xl">
-                At Siddharth Electricals, we are committed to protecting your privacy. This policy outlines how we collect, use, and
+                At 1stop4it, we are committed to protecting your privacy. This policy outlines how we collect, use, and
                 safeguard your personal information.
               </p>
             </div>

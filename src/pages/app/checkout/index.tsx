@@ -16,7 +16,7 @@ const Checkout: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Checkout | Siddharth-Electricals</title>
+        <title>Checkout | 1Stop4It</title>
       </Head>
       <main className="min-h-screen bg-bg-gray pb-14 ">
         <Cart products={cartStore.products} />

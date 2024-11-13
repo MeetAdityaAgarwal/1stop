@@ -85,7 +85,7 @@ const Update: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Change Name, E-mail, and Delete Account | Siddharth-Electricals</title>
+        <title>Change Name, E-mail, and Delete Account | 1Stop4It</title>
       </Head>
       <main className="mx-auto min-h-screen w-full max-w-screen-sm px-4 pb-14 pt-52 sm:w-[95vw] md:pt-40">
         <ConfirmationModal

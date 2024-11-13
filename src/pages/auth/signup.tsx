@@ -56,7 +56,7 @@ const SignUp = () => {
   return (
     <>
       <Head>
-        <title>Sign Up | Siddharth-Electricals</title>
+        <title>Sign Up | 1Stop4It</title>
       </Head>
       <main className="mx-auto min-h-screen w-full max-w-screen-sm px-4 pt-52 sm:w-[95vw] md:pt-40">
         <div className="grid gap-4">

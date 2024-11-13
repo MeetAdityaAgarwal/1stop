@@ -103,7 +103,7 @@ const Users: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Users | Siddharth-Electricals</title>
+        <title>Users | 1Stop4It</title>
       </Head>
       <main className="min-h-screen bg-bg-gray ">
         <div className="mx-auto w-full max-w-screen-2xl px-4 sm:w-[95vw]">

@@ -17,7 +17,7 @@ export default function DashboardOrdersComponent() {
           <div className="flex h-[60px] items-center px-6">
             <Link href="#" className="flex items-center gap-2 font-semibold" prefetch={false}>
               <Package2Icon className="h-6 w-6" />
-              <span className="">Siddharth Electricals</span>
+              <span className="">1stop4it</span>
             </Link>
           </div>
           <div className="flex-1">

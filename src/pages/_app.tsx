@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <SessionProvider session={pageProps.session}>
       <Head>
-        <title>Siddharth-Electricals</title>
+        <title>1Stop4It</title>
       </Head>
       {getLayout(<Component {...pageProps} />)}
       <ToastWrapper />

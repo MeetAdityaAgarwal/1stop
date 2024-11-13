@@ -75,7 +75,7 @@ const Prime: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Prime | Siddharth-Electricals</title>
+        <title>Prime | 1Stop4It</title>
       </Head>
       <main className="grid min-h-screen place-items-center ">
         <div className="mx-auto w-full max-w-screen-sm px-4 sm:w-[95vw]">

@@ -18,7 +18,7 @@ const Home: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Siddharth-Electricals</title>
+        <title>1Stop4It</title>
         <meta name="description" content="a complete nutriton store" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

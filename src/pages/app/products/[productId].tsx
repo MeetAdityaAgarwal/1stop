@@ -41,7 +41,7 @@ const ShowProduct: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>{product?.name ?? "Product"} | Siddharth-Electricals</title>
+        <title>{product?.name ?? "Product"} | 1Stop4It</title>
       </Head>
       <main className="min-h-screen pb-14">
         <div className="w-full max-w-6xl mx-auto py-12 px-4 md:px-6">

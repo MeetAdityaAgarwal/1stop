@@ -25,7 +25,7 @@ const Categories: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Categories | Siddharth-Electricals</title>
+        <title>Categories | 1Stop4It</title>
       </Head>
       <main className="min-h-screen bg-bg-gray pb-14 pt-6 md:pt-4">
         <CategoryList categories={categoriesQuery.data} />

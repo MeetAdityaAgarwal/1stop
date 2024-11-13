@@ -29,7 +29,7 @@ const ShowOrder: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Order | Siddharth-Electricals</title>
+        <title>Order | 1Stop4It</title>
       </Head>
       <main className="min-h-screen ">
         <div className="mx-auto w-full max-w-screen-lg px-4 sm:w-[95vw]">

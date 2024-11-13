@@ -29,7 +29,7 @@ const ShowCategory: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Products | Siddharth-Electricals</title>
+        <title>Products | 1Stop4It</title>
       </Head>
       <main className="min-h-screen bg-bg-gray ">
         <ProductList products={productsQuery.data} />

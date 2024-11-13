@@ -33,7 +33,7 @@ const Dashboard: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Dashboard | Siddharth-Electricals</title>
+        <title>Dashboard | 1Stop4It</title>
       </Head>
       <main className="mx-auto min-h-screen w-full max-w-[200px] pb-14 pt-52 sm:w-[95vw] md:pt-40">
         <ul className="grid gap-2.5">

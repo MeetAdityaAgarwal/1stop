@@ -74,7 +74,7 @@ const AddProduct: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Add Product | Siddharth-Electricals</title>
+        <title>Add Product | 1Stop4It</title>
       </Head>
       <main className="min-h-screen pb-14 pt-52 md:pt-40">
         <div className="mx-auto w-full max-w-screen-sm px-4 sm:w-[95vw]">
