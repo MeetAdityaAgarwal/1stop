@@ -80,10 +80,10 @@ const Navbar = ({ data: products }: { data: Product[] }) => {
             <Link href={"/app/checkout"}>
               <button className="relative flex items-center gap-1 rounded-sm px-2 py-3 transition hover:ring-1 hover:ring-white">
                 <ShoppingBagIcon
-                  className="aspect-square w-7"
+                  className="aspect-square w-9"
                   aria-hidden="true"
                 />
-                <span className="absolute left-4 top-4 h-5 text-base font-medium text-orange-500 md:text-lg">
+                <span className="absolute left-5 top-6 h-5 text-base font-medium text-white md:text-lg">
                   {totalQuantity}
                 </span>
                 <span className="text-sm font-medium md:text-base">Cart</span>

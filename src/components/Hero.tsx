@@ -10,9 +10,6 @@ import type { NavigationOptions } from "swiper/types/modules/navigation";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 const heroImages = [
-  { src: "/img/hero-carousel-one.webp", alt: "hero-carousel-one" },
-  { src: "/img/hero-carousel-two.webp", alt: "hero-carousel-two" },
-  { src: "/img/hero-carousel-three.webp", alt: "hero-carousel-three" },
   { src: "/img/hero-carousel-four.webp", alt: "hero-carousel-four" },
   { src: "/img/hero-carousel-five.webp", alt: "hero-carousel-five" },
   { src: "/img/hero-carousel-six.webp", alt: "hero-carousel-six" },

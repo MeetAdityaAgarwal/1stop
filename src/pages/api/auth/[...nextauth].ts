@@ -35,8 +35,8 @@ export const authOptions: NextAuthOptions = {
     // ...add more providers here
   ],
   theme: {
-    colorScheme: "light",
-    logo: "/logo/png/logo-no-background.png",
+    colorScheme: "dark",
+    logo: "/logo/png/logo-no-background-mang.png",
   },
   pages: {
     newUser: "/app",

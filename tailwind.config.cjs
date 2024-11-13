@@ -28,7 +28,7 @@ module.exports = {
         success: 'hsl(142, 71%, 45%)',
         danger: 'hsl(0, 84%, 60%)',
         gradient: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,70,121,0) 0%, rgba(0,212,255,1) 100%)',
-        layout: 'hsl(209, 100%, 46%)',//'hsl(220, 14%, 96%)', this is white background
+        layout: 'hsl(25, 99%, 64%)',//'hsl(220, 14%, 96%)', this is white background
         'layout-light': 'hsl(217, 19%, 27%)',
         lowkey: 'hsl(220, 14%, 96%)', // 'hsl(220, 9%, 46%)',
         title: 'hsl((220, 14%, 96%)',
@@ -109,7 +109,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/forms"),
-    require("@tailwindcss/line-clamp"),
+    // require("@tailwindcss/line-clamp"),
     require("@headlessui/tailwindcss"),
     require("tailwindcss-animate"),
   ],

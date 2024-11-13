@@ -90,7 +90,7 @@ const App: NextPageWithLayout<AppProps> = ({ categories, products }) => {
 
   return (
     <>
-      <main className="min-h-screen bg-gradient-blue pt-52 md:pt-40">
+      <main className="min-h-screen bg-gradient-custom pt-52 md:pt-40">
         <Hero />
         <div className="flex flex-col gap-5 mt-8 pb-14">
           <CategoryList categories={categories} />

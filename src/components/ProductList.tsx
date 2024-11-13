@@ -60,54 +60,65 @@ const SlicedProducts = ({ products, range }: SlicedProductsProps) => {
 
   return (
     <Fragment>
-      {products.slice(range.from, range.to).map((product) => (
-        <div
-          key={product.id}
-          className="flex flex-col gap-3 bg-white p-5 shadow transition-opacity hover:bg-opacity-80 active:bg-opacity-100"
-        >
-          <Link
-            href={`/app/products/${product.id}`}
-            className="relative mx-auto h-48 w-48"
+      {products.slice(range.from, range.to).map((product) => {
+        const wholesalePrice = product.price * 0.5;
+        return (
+          <div
+            key={product.id}
+            className="flex flex-col gap-3 rounded-lg bg-white p-5 shadow transition-opacity hover:bg-opacity-80 active:bg-opacity-100"
           >
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={192}
-              height={192}
-              className="absolute h-full w-full object-contain"
-              loading="lazy"
-            />
-          </Link>
-          <div className="flex items-center gap-1">
-            {product.rating ? renderStars(product.rating) : "-"}
-          </div>
-          <Link href={`/app/products/${product.id}`}>
-            <h2 className="text-sm font-medium text-title transition-colors line-clamp-1 hover:text-primary md:text-base">
-              {product.name ?? "-"}
-            </h2>
-          </Link>
-          <p className="text-xs font-medium text-text line-clamp-2 md:text-sm">
-            {product.description ?? "-"}
-          </p>
-          {product.price ? (
-            <p className="text-sm font-medium text-title md:text-base">
-              {formatCurrency(product.price, "USD")}
+            <Link
+              href={`/app/products/${product.id}`}
+              className="relative mx-auto h-48 w-48"
+            >
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={192}
+                height={192}
+                className="absolute h-full w-full object-contain"
+                loading="lazy"
+              />
+            </Link>
+            <div className="flex items-center gap-1">
+              {product.rating ? renderStars(product.rating) : "-"}
+            </div>
+            <Link href={`/app/products/${product.id}`}>
+              <h2 className="text-sm font-medium text-title transition-colors line-clamp-1 hover:text-primary md:text-base">
+                {product.name ?? "-"}
+              </h2>
+            </Link>
+            <p className="text-xs font-medium text-text line-clamp-2 md:text-sm">
+              {product.description ?? "-"}
             </p>
-          ) : (
-            "-"
-          )}
-          <Button
-            aria-label="add product to cart"
-            className="w-full bg-orange-300 text-gray-200 transition-colors hover:bg-primary active:bg-orange-300"
-            onClick={() => {
-              cartStore.addProduct(product);
-              toast.success(`${truncateText(product.name, 16)} added to cart`);
-            }}
-          >
-            Add to Cart
-          </Button>
-        </div>
-      ))}
+            <div className="flex justify-between items-center gap-2">
+              {/* Show original price with strike-through */}
+              {product.price ? (
+                <p className="text-sm font-medium text-gray-400 line-through md:text-base">
+                  {formatCurrency(product.price, "USD")}
+                </p>
+              ) : null}
+
+              {/* Show wholesale price */}
+              {wholesalePrice ? (
+                <p className="text-sm font-medium text-title md:text-base">
+                  {formatCurrency(wholesalePrice, "USD") + "   (wholesale)"}
+                </p>
+              ) : null}
+            </div>
+            <Button
+              aria-label="add product to cart"
+              className="w-full bg-orange-300 text-gray-200 transition-colors hover:bg-primary active:bg-orange-300"
+              onClick={() => {
+                cartStore.addProduct(product);
+                toast.success(`${truncateText(product.name, 16)} added to cart`);
+              }}
+            >
+              Add to Cart
+            </Button>
+          </div>
+        )
+      })}
     </Fragment>
   );
 };
